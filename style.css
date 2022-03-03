@@ -1,0 +1,262 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing:border-box;
+}
+
+/* ------------------------- */
+/* POPUP */
+/* ------------------------- */
+
+/* aixo es perq quan sobri el pop up, la resta de pagina se vegi "borrosa"*/
+.overlay {
+	background: rgba(0,0,0,.3); /* .3 es qe al negre li donam una opacitat del 30%*/
+	position: fixed;/* desdaqui posam coses perq aquest overlay ocupi tota la pag, fins...*/
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;/*fins aki*/
+	align-items: center;/*des daqui es per fer que el pop up s'obri just al centre de la web*/
+	justify-content: center;
+	display: flex;/*fins aki */
+	visibility: hidden;
+}
+
+
+.overlay.active {
+	visibility: visible;
+}
+
+.popup {
+	background: #F8F8F8;/*fondo pop up */
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+	border-radius: 3px;
+	font-family: 'Montserrat', sans-serif;
+	padding: 20px;
+	text-align: center;
+	width: 600px;
+	
+	transition: .3s ease all;
+	transform: scale(0.7); /* aixo es per fer efecte de q quan sobri la pop up se fa de petit a gran. Hem de mirar el final(**) */
+	opacity: 0;
+}
+
+.popup .btn-cerrar-popup {
+	font-size: 16px;
+	line-height: 16px;
+	display: block;
+	text-align: right;
+	transition: .3s ease all;
+	color: #BBBBBB;
+}
+
+.popup .btn-cerrar-popup:hover { /* lo que passa quan passam el cursor per damunt la creu de tancar */
+	color: #000;
+}
+
+/*.popup header {
+	font-size: 36px;
+	font-weight: 600;
+	margin-bottom: 10px;
+	background: #b0c0e6;
+	opacity: 0;  /*aixo ho he de llevar si no emplei les animacions*/
+	/*grid-column-start: 1;
+	grid-column-end: -1;
+	/*grid-area: header; /* per dirli q el header ocupi totes les columnes i quedi com 1 sol titol; o tb ho podem fer amb les 2 next linies: */
+	/*grid-column-start: 1;
+	grid-column-end: -1; /*darrera columna 
+}*/
+
+/*.popup h4 {
+	font-size: 26px;
+	font-weight: 300;
+	margin-bottom: 40px;
+	opacity: 0;
+}*/
+/*
+.popup form .contenedor-inputs {
+	opacity: 0;
+}
+
+.popup form .contenedor-inputs input { 
+	width: 100%;
+	margin-bottom: 20px;
+	height: 52px;
+	font-size: 18px;
+	line-height: 52px;
+	text-align: center;
+	border: 1px solid #BBBBBB;
+}
+
+.popup form .btn-submit {
+	padding: 0 20px;
+	height: 40px;
+	line-height: 40px;
+	border: none;
+	color: #fff;
+	background: #5E7DE3;
+	border-radius: 3px;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 16px;
+	cursor: pointer;
+	transition: .3s ease all;
+}
+
+.popup form .btn-submit:hover {
+	background: rgba(94,125,227, .9);
+}
+
+/* ------------------------- */
+
+.contenedor {
+	width: 90%;
+	max-width: 1000px;
+	margin: 20px auto;
+	display: grid;
+	grid-gap: 20px;
+	grid-template-columns: repeat(2, 1fr); /* el num 2 és perq dividim el grid en 2 columnes */
+	grid-template-rows: repeat(4, auto); /* aquí li deim que hi haurà 4 files; auto = tamany automàtic */
+
+	grid-template-areas: "header header header"
+						 "contenido contenido sidebar"
+						 "widget-1 widget-2 sidebar"
+						 "footer footer footer";
+}
+
+.contenedor > div, /* això > vol dir que aquest estil s'aplica a tots els divs que hi hagi dins el contenedor */
+.contenedor .header,
+.contenedor .contenido,
+.contenedor .sidebar,
+.contenedor .footer {
+	background: #fff;
+	padding: 20px;
+	border-radius: 4px;
+}
+
+.contenedor .header {
+	/*background: #12203E;
+	color: #fff;*/
+	font-size: 36px;
+	font-weight: 600;
+	margin-bottom: 10px;
+	background: #c9d2e7;
+	opacity: 0; 
+	/*grid-area: header; /* per dirli q el header ocupi totes les columnes i quedi com 1 sol titol; o tb ho podem fer amb les 2 next linies: */
+	grid-column-start: 1;
+	grid-column-end: -1; /*darrera columna*/ 
+}
+
+
+.contenedor .contenido {
+	grid-area: contenido;
+}
+
+.contenedor .sidebar {
+	grid-column: 3 / 4; /*sidebar empieza en la columna 3 y termina en la 4*/
+	background: #fAA43D;
+	text-align: center;/*desde aqui fins ** es perq el contingut del sidebar es posi al centre del seu espai */
+	display: flex;
+	align-items: center; /* ** */
+	justify-content: center;
+	min-height: 100px;
+
+	grid-row: span 2; /*aixo es per dirli q ocupi 2 files, la next sentencia fa lo mateix */
+	/*grid-area: sidebar;*/
+}
+
+.contenedor .footer {
+	background: #12203E;
+	color: #fff;
+	grid-area: footer;
+	font-size: 26px;
+	font-weight: 300;
+	margin-bottom: 40px;
+	opacity: 0;
+}
+
+
+/*
+body {
+	background: #fff;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.contenedor {
+	width: 90%;
+	max-width: 1000px;
+	margin: 20px auto;
+}
+
+.contenedor article {
+	line-height: 28px;
+}
+
+.contenedor article h1 {
+	font-size: 30px;
+	text-align: left;
+	padding: 50px 0;
+}
+
+.contenedor article p {
+	margin-bottom: 20px;
+}
+
+.contenedor article .btn-abrir-popup {
+	padding: 0 20px;
+	margin-bottom: 20px;
+	height: 40px;
+	line-height: 40px;
+	border: none;
+	color: #fff;
+	background: #5E7DE3;
+	border-radius: 3px;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 16px;
+	cursor: pointer;
+	transition: .3s ease all;
+	cursor: pointer;
+}
+
+.contenedor article .btn-abrir-popup:hover {
+	background: rgba(94,125,227, .9);
+}*/
+
+
+/* ANIMACIONES*/
+
+/* ------------------------- */
+.popup.active {	transform: scale(1); opacity: 1; }/*(**) aquest scale (1) es lo q ho acaba de fer gran */
+.popup.active .contenedor header { animation: entradaTitulo .8s ease .5s forwards; } /* lo de forwards fa que l'element que ha sofrit l'animació es quedi 
+amb les darreres propietats que hi hem aplicat... és a dir, la part dels {} del to */
+/* .8s es el temps q dura l'animacio i el .5s es el temps que tarda en començar a ferse l'animacio*/
+.popup.active .contenedor .footer { animation: entradaSubtitulo .8s ease .5s forwards; }
+/*.popup.active .contenedor-inputs { animation: entradaInputs 1s linear 1s forwards; }*/
+
+@keyframes entradaTitulo {
+	from {
+		opacity: 0;
+		transform: translateY(-25px);
+	}
+
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes entradaSubtitulo {
+	from {
+		opacity: 0;
+		transform: translateY(25px);
+	}
+
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+/*@keyframes entradaInputs {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}*/
