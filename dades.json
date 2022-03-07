@@ -10,9 +10,11 @@
         "position_x": -14.8,
         "position_y": 2,
         "position_z": -5,
-        "depth": 5,
-        "width": 0.1,
+        "depth": 0.1,
+        "width": 5,
         "height": 7,
+        "orientacioMarco": "0 90 0",
+        "pared": 0,
         "alert": "holita"
     },
     {
@@ -25,10 +27,12 @@
         },
         "position_x": -14.8,
         "position_y": 2,
-        "position_z": -15,
-        "depth": 5,
-        "width": 0.2,
+        "position_z": -25,
+        "depth": 0.1,
+        "width": 5,
         "height": 7,
+        "orientacioMarco": "0 90 0",
+        "pared": 0,
         "alert": "holita"
     },
     {
@@ -39,12 +43,32 @@
             "biografiaCast": "Aquí tenim la biografia en castellà",
             "biografiaAng": "Aquí tenim la biografia en anglès"
         },
-        "position_x": -14.8,
+        "position_x": 7,
         "position_y": 2,
-        "position_z": -25,
-        "depth": 5,
-        "width": 0.2,
+        "position_z": -34.8,
+        "depth": 0.1,
+        "width": 5,
         "height": 7,
+        "orientacioMarco": "0 0 0",
+        "pared": 1,
+        "alert": "holita"
+    },
+    {
+        "nom": "HedyLamarr3",
+        "imatge": "assets/HedyLamarr.jpg",
+        "biografies": {
+            "biografiaCat": "Aquí tenim la biografia en català",
+            "biografiaCast": "Aquí tenim la biografia en castellà",
+            "biografiaAng": "Aquí tenim la biografia en anglès"
+        },
+        "position_x": 14.7,
+        "position_y": 2,
+        "position_z": -15,
+        "depth": 0.1,
+        "width": 5,
+        "height": 7,
+        "orientacioMarco": "0 90 0",
+        "pared": 0,
         "alert": "holita"
     }
 ]

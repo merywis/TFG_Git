@@ -4,7 +4,7 @@
 <head>
   <title>TFG</title>
   <meta name="description" content="TFG">
-  <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
   <!--jaume 
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600|Open+Sans" rel="stylesheet">-->
@@ -13,10 +13,29 @@
 </head>
 
 <body onload="crearGaleria()">
-  <a-scene id="sala">
+  <a-scene id="sala" renderer="colorManagement: true;">
+
+    <a-assets>
+      <a-asset-item id="cityModel" src="assets/scene.gltf"></a-asset-item>
+    </a-assets>
+    
+    
+
+    <!-- box que fa d'habitació babbage -->
+    <a-box color="grey" position="-25 3 -15" width="19.8" depth="40" height="16" material="side: double"></a-box>
+    <!-- box que funciona com a suelo babbage>-->
+  
+    <a-box src="assets/suelo.jpg" position="-25 -5 -15" rotation="90 0 0" height="40" width="60" depth="0.1"> </a-box>
+    
+    <a-gltf-model src="#cityModel" scale = "4 4 4" position="-9 -4 -30"></a-gltf-model>
+    
+    
+  
+   
+
 
     <!-- box que fa d'habitació principal -->
-    <a-box src="assets/pared.jpg" position="15 3 -15" depth="40" width="60" height="16" material="side: double"></a-box>
+    <a-box src="assets/pared.jpg" position="15 3 -15" width="60" depth="40" height="16" material="side: double"></a-box>
 
     <!-- plane que podria fer de suelo pero se veuen transparencies de la box d'abans -->
     <!-- <a-plane  position="0 -8 0" rotation="-90 0 0" width="50" height="30" color="blue"></a-plane> -->
@@ -49,13 +68,20 @@
     <a-cylinder src="assets/puff.jpg" position="0 -5 -20" radius="3.5" height="3"></a-cylinder>
 
     <!-- llum -->
-    <a-entity light="type: ambient; color: #white"></a-entity>
+     <a-entity light="type: ambient; color: #fff"></a-entity> 
+    <!--<a-entity light="type: directional; color: #EEE; intensity: 1.5" position="-1 1 0"></a-entity>
+    <a-entity light="type: directional; color: #EEE; intensity: 1.5" position="1 1 0"></a-entity>
+    <a-entity light="type: directional; color: #EEE; intensity: 1" position="0 1 1"></a-entity>
+    <a-entity light="type: directional; color: #EEE; intensity: 1" position="0 1 -1"></a-entity>
+    <a-entity light="type: directional; color: #EEE; intensity: 0.5" position="0 -1 0"></a-entity>-->
 
 
+    
     <!-- Camera + cursor. parámetro raycaster és per clicar -->
     <!--look-controls = es lo que nos permite poder mirar con la camara
      wasd-controls = usar teclado para desplazarse -->
-    <a-entity camera id = "camera" look-controls wasd-controls="acceleration: 100" mouse-controls="pointerlockEnabled:true">
+    <a-entity camera id="camera" look-controls wasd-controls="acceleration: 100"
+      mouse-controls="pointerlockEnabled:true">
       <a-cursor id="cursor" raycaster="objects: .clickable">
       </a-cursor>
     </a-entity>
