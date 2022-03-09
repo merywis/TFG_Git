@@ -8,9 +8,39 @@ boxMenu.addEventListener('click', function () {
   boxMenu.parentNode.removeChild(boxMenu);
 });
 
+function menuInicial(){
+
+  var menuPrincipal = document.createElement("a-entity");
+  menuPrincipal.setAttribute('id', "boxTextoMenu");
+  menuPrincipal.setAttribute('class', "clickable");
+  menuPrincipal.setAttribute('position', "0 0.3 -3");
+  menuPrincipal.setAttribute('scale', "0.5 0.5 1");
+  menuPrincipal.setAttribute('text', "value: Benvinguts i benvingudes al museu virtual \n de les dones informatiques de la historia. \n Clica per comencar.; color: black; width: 6; wrapCount: 40; align:center; shader: msdf; font: https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/rhodiumlibre/RhodiumLibre-Regular.json");
+  menuPrincipal.setAttribute('geometry', "primitive: plane; width: 7; height: 2.5");
+  menuPrincipal.setAttribute('material', "color: pink; shader: flat; opacity: 0.7; visible: true");
+  document.getElementById("sala").append(menuPrincipal);
+}
+
+/*
+<a-entity 
+      event-set__enter="_event: mouseenter; text.color: red"
+      event-set__leave="_event: mouseleave; text.color: blue"
+      event-set__mouseenter="material.color: blue"
+      ></a-entity>
 
 
+      <a-box id="boxTextoMenu" class="clickable" position="0 0.3 -5.1" depth="0.1" width="7" height="2"
+      material='opacity: 0.3;' color="#D0B7EE">
+      <a-entity position="0 0.3 -5" scale="3 3 3"
+        text="value: Benvinguts i benvingudes al museu virtual de les dones informatiques de la historia. 
+        Clica per començar; 
+      color: black; width:3.7; align:center; shader: msdf;
+      font: https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/rhodiumlibre/RhodiumLibre-Regular.json">
+      </a-entity>
+    </a-box>
+*/
 function crearGaleria() {
+  menuInicial();
   var idClicat;
   var xmlhttp = new XMLHttpRequest();
   var url = "dades.json";
@@ -29,56 +59,10 @@ function crearGaleria() {
         boxQuadre.setAttribute('height', dades[i].height);
         boxQuadre.setAttribute('rotation', dades[i].orientacioMarco);
         document.getElementById("sala").append(boxQuadre);
-        crearMarcos(dades,i);
+       
         //marco
-        /*
-        var marcoEsq = document.createElement("a-box");
-        marcoEsq.setAttribute('src', "assets/marco.jpg");
-        marcoEsq.setAttribute('position', { x: dades[i].position_x, y: dades[i].position_y, z: dades[i].position_z})
-       if(dades[i].pared == 0){
-        marcoEsq.setAttribute('position', { x: dades[i].position_x, y: dades[i].position_y, z: dades[i].position_z +2.7})
-       }else {
         crearMarcos(dades,i);
-        marcoEsq.setAttribute('position', { x: dades[i].position_x -2.7, y: dades[i].position_y, z: dades[i].position_z})
-       }
-        marcoEsq.setAttribute('depth', dades[i].depth);
-        marcoEsq.setAttribute('width', "0.4");
-        marcoEsq.setAttribute('height', dades[i].height + 0.5);
-        marcoEsq.setAttribute('rotation', dades[i].orientacioMarco);
-        document.getElementById("sala").append(marcoEsq);
-
-
-        var marcoDre = document.createElement("a-box");
-        marcoDre.setAttribute('src', "assets/marco.jpg");
-        if (dades[i].pared == 0) {
-          marcoDre.setAttribute('position', { x: dades[i].position_x, y: dades[i].position_y, z: dades[i].position_z - 2.7 })
-        } else {
-          marcoDre.setAttribute('position', { x: dades[i].position_x + 2.7, y: dades[i].position_y, z: dades[i].position_z })
-        }
-        marcoDre.setAttribute('depth', dades[i].depth);
-        marcoDre.setAttribute('width', "0.4");
-        marcoDre.setAttribute('height', dades[i].height + 0.5);
-        marcoDre.setAttribute('rotation', dades[i].orientacioMarco);
-        document.getElementById("sala").append(marcoDre);
-
-        var marcoSup = document.createElement("a-box");
-        marcoSup.setAttribute('src', "assets/marco.jpg");
-        marcoSup.setAttribute('position', { x: dades[i].position_x, y: dades[i].position_y + 3.7, z: dades[i].position_z })
-        marcoSup.setAttribute('depth', dades[i].depth);
-        marcoSup.setAttribute('width', dades[i].width + 0.8);
-        marcoSup.setAttribute('height', "0.5");
-        marcoSup.setAttribute('rotation', dades[i].orientacioMarco);
-        document.getElementById("sala").append(marcoSup);
-
-        var marcoInf = document.createElement("a-box");
-        marcoInf.setAttribute('src', "assets/marco.jpg");
-        marcoInf.setAttribute('position', { x: dades[i].position_x, y: dades[i].position_y - 3.7, z: dades[i].position_z })
-        marcoInf.setAttribute('depth', dades[i].depth);
-        marcoInf.setAttribute('width', dades[i].width + 0.8);
-        marcoInf.setAttribute('height', "0.5");
-        marcoInf.setAttribute('rotation', dades[i].orientacioMarco);
-        document.getElementById("sala").append(marcoInf);*/
-
+        
         /* VENTANA POP UP ALS QUADRES */
         var boxPopUp = document.createElement("a-box");
         var boxTancarPopUp = document.createElement("a-box");
@@ -206,6 +190,33 @@ function crearMarcos(dades, i) {
   marcoInf.setAttribute('rotation', dades[i].orientacioMarco);
   document.getElementById("sala").append(marcoInf);
 }
+
+/* 
+AFRAME.registerComponent('hover-video', {
+    schema: {
+        value: { default: '' }
+    },
+
+    init: function () {
+        var data = this.data;
+        var el = this.el;
+
+        el.addEventListener('mouseenter', function () {
+            var video = document.getElementById("myVideo");
+            video.pause();
+            console.log("Hola");
+        });
+
+        el.addEventListener('mouseleave', function () {
+            var video = document.getElementById("myVideo");
+            video.play();
+            console.log("Adios");
+        });
+    }
+});
+
+
+*/
 
 
 
