@@ -7,6 +7,7 @@
             "biografiaCast": "Aquí tenim la biografia en castellà",
             "biografiaAng": "Aquí tenim la biografia en anglès"
         },
+        "frase":  "Si es una buena idea, continuad y llevadla a término. Es mucho más fácil pedir disculpas que conseguir el permiso necesario”, Grace Murray Hopper.",
         "position_x": -14.8,
         "position_y": 2,
         "position_z": -5,
@@ -25,6 +26,7 @@
             "biografiaCast": "Aquí tenim la biografia en castellà",
             "biografiaAng": "Aquí tenim la biografia en anglès"
         },
+        "frase": "Si es una buena idea, continuad y llevadla a término. Es mucho más fácil pedir disculpas que conseguir el permiso necesario”, Grace Murray Hopper.",
         "position_x": -14.8,
         "position_y": 2,
         "position_z": -25,
@@ -43,6 +45,7 @@
             "biografiaCast": "Aquí tenim la biografia en castellà",
             "biografiaAng": "Aquí tenim la biografia en anglès"
         },
+        "frase":  "Si es una buena idea, continuad y llevadla a término. Es mucho más fácil pedir disculpas que conseguir el permiso necesario”, Grace Murray Hopper.",
         "position_x": 7,
         "position_y": 2,
         "position_z": -34.8,
@@ -61,6 +64,7 @@
             "biografiaCast": "Aquí tenim la biografia en castellà",
             "biografiaAng": "Aquí tenim la biografia en anglès"
         },
+        "frase": "Si es una buena idea, continuad y llevadla a término. Es mucho más fácil pedir disculpas que conseguir el permiso necesario”, Grace Murray Hopper.",
         "position_x": 14.7,
         "position_y": 2,
         "position_z": -15,
@@ -68,7 +72,7 @@
         "width": 5,
         "height": 7,
         "orientacioMarco": "0 90 0",
-        "pared": 0,
+        "pared": 2,
         "alert": "holita"
     }
 ]
