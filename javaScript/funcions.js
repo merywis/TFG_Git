@@ -30,6 +30,7 @@ menuPrincipal.addEventListener('click', function () {
   menuPrincipal.parentNode.removeChild(menuPrincipal);
 });
 
+
 function crearGaleria() {
   menuInicial();
   var idClicat;
@@ -49,6 +50,7 @@ function crearGaleria() {
         boxQuadre.setAttribute('width', dades[i].width);
         boxQuadre.setAttribute('height', dades[i].height);
         boxQuadre.setAttribute('rotation', dades[i].orientacioMarco);
+        ferPopUps(boxQuadre);
         document.getElementById("sala").append(boxQuadre);
 
         //marco
@@ -61,7 +63,7 @@ function crearGaleria() {
           frasePared.setAttribute('position', { x: dades[i].position_x, y: dades[i].position_y, z: dades[i].position_z - 10 })
         } else if (dades[i].pared == 2) {
           frasePared.setAttribute('scale', "-3 3 4");
-          frasePared.setAttribute('position', { x: dades[i].position_x -1, y: dades[i].position_y, z: dades[i].position_z + 10 })
+          frasePared.setAttribute('position', { x: dades[i].position_x - 1, y: dades[i].position_y, z: dades[i].position_z + 10 })
         } else {
           frasePared.setAttribute('scale', "3 3 4");
           frasePared.setAttribute('position', { x: dades[i].position_x + 10, y: dades[i].position_y, z: dades[i].position_z })
@@ -69,81 +71,9 @@ function crearGaleria() {
         frasePared.setAttribute('rotation', dades[i].orientacioMarco);
         //frasePared.setAttribute('material', "side: double");
         frasePared.setAttribute('text', "value: holaaa, aqui hi haura una frase de sa mes xula del món; color: black; width: 4; wrapCount: 25; shader: msdf; font: https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/italianno/Italianno-Regular.json");
-         document.getElementById("sala").append(frasePared);
+        document.getElementById("sala").append(frasePared);
 
-
-        /* VENTANA POP UP ALS QUADRES */
-        var boxPopUp = document.createElement("a-box");
-        var boxTancarPopUp = document.createElement("a-box");
-
-        /* FUNCIÓ OBRIR POP UP QUAN CLICAM QUADRE */
-        boxQuadre.addEventListener('click', function () {
-          //document.getElementById("camera").setAttribute('wasd-controls', true); ho faig aixi?
-          //document.getElementById("camera").removeAttribute('wasd-controls');
-
-
-          var pos = document.getElementById("camera").getAttribute('position');
-          var rotationCamera = document.getElementById("camera").getAttribute('rotation');
-
-          console.log("posicio camara normal:");
-          console.log(pos);
-
-          var posProva = new THREE.Vector3(pos.x, pos.y, pos.z);
-
-          posProva = posProva.clone().negate().normalize().multiplyScalar(1.5);
-
-          console.log("posicio rara vector3:");
-          console.log(posProva);
-          /*var provaBox = document.createElement("a-box");
-          marcoInf.setAttribute('color', "yellow");
-          provaBox.setAttribute('position', positionStack)
-          provaBox.setAttribute('depth', "0.8");
-          provaBox.setAttribute('width', "0.1");
-          provaBox.setAttribute('height', "0.5");
-          document.getElementById("sala").append(provaBox); */
-
-          console.log("Rotació camara:");
-          console.log(rotationCamera);
-          boxPopUp.setAttribute('color', "purple");
-          var XposBox = Math.sin(rotationCamera.y) + pos.x;
-          var ZposBox = Math.cos(rotationCamera.y) + pos.z;
-          if (rotationCamera.y > 0) { //estic mirant cap a l'esquerra
-            XposBox = XposBox - 3;
-            ZposBox = ZposBox - 1.5;
-          } else if (rotationCamera.y < 0) { //mirar cas = 0?? // aqui estic mirant cap a la dreta
-            XposBox = XposBox + 1.5;
-            ZposBox = ZposBox - 1.5;
-          }
-          console.log("Posició box:");
-          console.log(XposBox, pos.y, ZposBox);
-
-          boxPopUp.setAttribute('position', { x: XposBox, y: pos.y, z: ZposBox });
-          // boxPopUp.setAttribute('position', posProva);
-
-          boxPopUp.setAttribute('rotation', rotationCamera);
-          boxPopUp.setAttribute('depth', 0.1);
-          boxPopUp.setAttribute('width', 4);
-          boxPopUp.setAttribute('height', 2);
-          document.getElementById("sala").append(boxPopUp); //jaume diu q append a camera i no a sala
-
-          //CREAM BOX QUE SERVIRÀ PER TANCAR POP UP
-          /*boxTancarPopUp.setAttribute('color', "red");
-          boxTancarPopUp.setAttribute('class', "clickable")
-          boxTancarPopUp.setAttribute('position', { x: XposBox, y: pos.y + 1.5, z: ZposBox });
-          boxTancarPopUp.setAttribute('rotation', rotationCamera);
-          boxTancarPopUp.setAttribute('depth', 0.1);
-          boxTancarPopUp.setAttribute('width', 1);
-          boxTancarPopUp.setAttribute('height', 1);
-          document.getElementById("sala").append(boxTancarPopUp);*/
-
-        });
-
-        /* FUNCIÓ TANCAR POP UP QUAN CLICAM CREU */
-        boxTancarPopUp.addEventListener('click', function (e) {
-          document.getElementById("camera").setAttribute('wasd-controls', true);
-          boxTancarPopUp.parentNode.removeChild(boxTancarPopUp);
-          boxPopUp.parentNode.removeChild(boxPopUp);
-        });
+        
       });
     }
   };
@@ -198,6 +128,55 @@ function crearMarcos(dades, i) {
   marcoInf.setAttribute('rotation', dades[i].orientacioMarco);
   document.getElementById("sala").append(marcoInf);
 }
+
+/* VENTANA POP UP ALS QUADRES */
+/* FUNCIÓ OBRIR POP UP QUAN CLICAM QUADRE */
+function ferPopUps(boxQuadre) {
+  boxQuadre.addEventListener('click', function () {
+    document.getElementById("rig").removeAttribute('movement-controls');
+
+    //var boxPopUppos = document.getElementById("camera").getAttribute('position');
+    var rotationCamera = document.getElementById("camera").getAttribute('rotation');
+    var boxPopUp = document.createElement("a-box");
+    boxPopUp.setAttribute('color', "grey");
+    /*var XposBox = Math.sin(rotationCamera.y) + pos.x;
+    var ZposBox = Math.cos(rotationCamera.y) + pos.z;*/
+
+    boxPopUp.setAttribute('position', { x: 0, y: 0, z: -3 });
+    boxPopUp.setAttribute('depth', 0.1);
+    boxPopUp.setAttribute('width', 4);
+    boxPopUp.setAttribute('height', 2);
+    document.getElementById("PopPupSala").setAttribute('rotation', rotationCamera);
+    document.getElementById("PopPupSala").append(boxPopUp);
+
+
+    //CREAM BOX QUE SERVIRÀ PER TANCAR POP UP
+    var boxTancarPopUp = document.createElement("a-box");
+    boxTancarPopUp.setAttribute('color', "red");
+    boxTancarPopUp.setAttribute('class', "clickable")
+    boxTancarPopUp.setAttribute('position', { x: 0, y: 1.5, z: -3 });
+    boxTancarPopUp.setAttribute('depth', 0.1);
+    boxTancarPopUp.setAttribute('width', 1);
+    boxTancarPopUp.setAttribute('height', 1);
+    document.getElementById("PopPupSala").append(boxTancarPopUp);
+
+    tancarPopUps(boxTancarPopUp, boxPopUp);
+  });
+}
+
+/* FUNCIÓ TANCAR POP UP QUAN CLICAM CREU */
+function tancarPopUps(boxTancarPopUp, boxPopUp) {
+  boxTancarPopUp.addEventListener('click', function (e) {
+    //MIRAR COM FERHOOO document.getElementById("rig").setAttribute('movement-controls', "speed: 0.7");
+    boxTancarPopUp.parentNode.removeChild(boxTancarPopUp);
+    boxPopUp.parentNode.removeChild(boxPopUp);
+  });
+}
+
+
+
+
+
 
 /* 
 AFRAME.registerComponent('hover-video', {

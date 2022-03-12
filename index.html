@@ -4,8 +4,10 @@
 <head>
   <title>TFG</title>
   <meta name="description" content="TFG">
-  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
- <!-- <script src="https://unpkg.com/aframe-event-set-component@^5.0.0/dist/aframe-event-set-component.min.js"></script> 
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  <!-- llibreria per poder fer move controls (amb lo de la camera) -->
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+  <!-- <script src="https://unpkg.com/aframe-event-set-component@^5.0.0/dist/aframe-event-set-component.min.js"></script> 
   <script src="https://unpkg.com/aframe-animation-component@5.0.0/dist/aframe-animation-component.min.js"></script> -->
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
@@ -38,8 +40,10 @@
     <a-box src="assets/suelo.jpg" position="15 -5 -15" rotation="90 0 0" height="40" width="60" depth="0.1"></a-box>
 
     <!-- box que fa de pared que divideix les dues habitacions-->
-    <a-plane src="assets/pared.jpg" position="15 3 -10" rotation = "0 90 0" width="30" height="16" material="side: double"></a-plane>
-    <a-plane  color="grey" position="15 10.5 -30" rotation = "0 90 0" width="10" height="2" material="side: double"></a-plane>
+    <a-plane src="assets/pared.jpg" position="15 3 -10" rotation="0 90 0" width="30" height="16"
+      material="side: double"></a-plane>
+    <a-plane color="grey" position="15 10.5 -30" rotation="0 90 0" width="10" height="2" material="side: double">
+    </a-plane>
     <!-- -->
 
 
@@ -49,7 +53,7 @@
     font: https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/italianno/Italianno-Regular.json">
     </a-entity>-->
 
- <!-- allura  Allura-Regular.json
+    <!-- allura  Allura-Regular.json
 italianno Italianno-Regular.json -->
 
     <!-- puff -->
@@ -64,15 +68,26 @@ italianno Italianno-Regular.json -->
     <a-entity light="type: directional; color: #EEE; intensity: 0.5" position="0 -1 0"></a-entity>-->
 
 
-
     <!-- Camera + cursor. parámetro raycaster és per clicar -->
     <!--look-controls = es lo que nos permite poder mirar con la camara
-     wasd-controls = usar teclado para desplazarse -->
-    <a-entity camera id="camera" look-controls wasd-controls="acceleration: 100"
-      mouse-controls="pointerlockEnabled:true">
-      <a-cursor id="cursor" raycaster="objects: .clickable">
-      </a-cursor>
+     movement-controls és llibreria per usar teclado para desplazarse -->
+    <a-entity id="rig" movement-controls="speed: 0.7" position="0 0 0">
+      <a-entity camera id="camera" look-controls="pointerLockEnabled: true" position="0 0 0">
+        <a-cursor id="cursor" raycaster="objects: .clickable">
+        </a-cursor>
+      </a-entity>
+      <!-- Pare del PopUp -->
+      <a-entity id="PopPupSala"></a-entity>
     </a-entity>
+
+
+
+    <!--
+    <a-entity camera id="camera2" active="false" look-controls="enabled: false">
+    </a-entity>
+-->
+
+
 
   </a-scene>
 
