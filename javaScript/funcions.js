@@ -73,7 +73,7 @@ function crearGaleria() {
         frasePared.setAttribute('text', "value: holaaa, aqui hi haura una frase de sa mes xula del món; color: black; width: 4; wrapCount: 25; shader: msdf; font: https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/italianno/Italianno-Regular.json");
         document.getElementById("sala").append(frasePared);
 
-        
+
       });
     }
   };
@@ -133,43 +133,41 @@ function crearMarcos(dades, i) {
 /* FUNCIÓ OBRIR POP UP QUAN CLICAM QUADRE */
 function ferPopUps(boxQuadre) {
   boxQuadre.addEventListener('click', function () {
-    document.getElementById("rig").removeAttribute('movement-controls');
-
-    //var boxPopUppos = document.getElementById("camera").getAttribute('position');
+    document.getElementById("rig").setAttribute('movement-controls', "enabled: false");
     var rotationCamera = document.getElementById("camera").getAttribute('rotation');
-    var boxPopUp = document.createElement("a-box");
-    boxPopUp.setAttribute('color', "grey");
+
+    var planePopUp = document.createElement("a-plane");
+    planePopUp.setAttribute('color', "grey");
+    planePopUp.setAttribute('position', { x: 0, y: 0, z: -3 });
+    planePopUp.setAttribute('width', 4);
+    planePopUp.setAttribute('height', 2);
+    planePopUp.setAttribute('material', "side: double");
+    document.getElementById("PopPupSala").setAttribute('rotation', rotationCamera);
+    document.getElementById("PopPupSala").append(planePopUp);
+
     /*var XposBox = Math.sin(rotationCamera.y) + pos.x;
     var ZposBox = Math.cos(rotationCamera.y) + pos.z;*/
 
-    boxPopUp.setAttribute('position', { x: 0, y: 0, z: -3 });
-    boxPopUp.setAttribute('depth', 0.1);
-    boxPopUp.setAttribute('width', 4);
-    boxPopUp.setAttribute('height', 2);
-    document.getElementById("PopPupSala").setAttribute('rotation', rotationCamera);
-    document.getElementById("PopPupSala").append(boxPopUp);
-
-
     //CREAM BOX QUE SERVIRÀ PER TANCAR POP UP
-    var boxTancarPopUp = document.createElement("a-box");
-    boxTancarPopUp.setAttribute('color', "red");
-    boxTancarPopUp.setAttribute('class', "clickable")
-    boxTancarPopUp.setAttribute('position', { x: 0, y: 1.5, z: -3 });
-    boxTancarPopUp.setAttribute('depth', 0.1);
-    boxTancarPopUp.setAttribute('width', 1);
-    boxTancarPopUp.setAttribute('height', 1);
-    document.getElementById("PopPupSala").append(boxTancarPopUp);
-
-    tancarPopUps(boxTancarPopUp, boxPopUp);
+    var planeTancarPopUp = document.createElement("a-plane");
+    planeTancarPopUp.setAttribute('color', "red");
+    planeTancarPopUp.setAttribute('class', "clickable")
+    planeTancarPopUp.setAttribute('position', { x: 1.75, y: 1.25, z: -3 });
+    planeTancarPopUp.setAttribute('width', 0.5);
+    planeTancarPopUp.setAttribute('height', 0.5);
+    planeTancarPopUp.setAttribute('material', "side: double");
+    tancarPopUps(planeTancarPopUp, planePopUp);
+    document.getElementById("PopPupSala").append(planeTancarPopUp);
+    
   });
 }
 
 /* FUNCIÓ TANCAR POP UP QUAN CLICAM CREU */
-function tancarPopUps(boxTancarPopUp, boxPopUp) {
-  boxTancarPopUp.addEventListener('click', function (e) {
-    //MIRAR COM FERHOOO document.getElementById("rig").setAttribute('movement-controls', "speed: 0.7");
-    boxTancarPopUp.parentNode.removeChild(boxTancarPopUp);
-    boxPopUp.parentNode.removeChild(boxPopUp);
+function tancarPopUps(planeTancarPopUp, planePopUp) {
+  planeTancarPopUp.addEventListener('click', function (e) {
+    document.getElementById("rig").setAttribute('movement-controls', "enabled: true");
+    planeTancarPopUp.parentNode.removeChild(planeTancarPopUp);
+    planePopUp.parentNode.removeChild(planePopUp);
   });
 }
 
