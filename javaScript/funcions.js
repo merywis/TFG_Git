@@ -6,7 +6,6 @@
 var menuPrincipal = document.createElement("a-entity");
 
 function menuInicial() {
-  ;
   //menuPrincipal.setAttribute('id', "boxTextoMenu");
   menuPrincipal.setAttribute('class', "clickable");
   menuPrincipal.setAttribute('position', "0 0.3 -3");
@@ -16,7 +15,6 @@ function menuInicial() {
   menuPrincipal.setAttribute('material', "color: #D0B7EE; shader: flat; opacity: 0.7; visible: true");
   document.getElementById("sala").append(menuPrincipal);
 }
-
 /*
 <a-entity 
       event-set__enter="_event: mouseenter; text.color: red"
@@ -27,13 +25,11 @@ function menuInicial() {
 
 /*  funció per eliminar el menú si hi clicam damunt */
 menuPrincipal.addEventListener('click', function () {
-  menuPrincipal.parentNode.removeChild(menuPrincipal);
+  menuPrincipal.remove();
 });
-
 
 function crearGaleria() {
   menuInicial();
-  var idClicat;
   var xmlhttp = new XMLHttpRequest();
   var url = "dades.json";
   xmlhttp.onreadystatechange = function () {
@@ -50,7 +46,7 @@ function crearGaleria() {
         boxQuadre.setAttribute('width', dades[i].width);
         boxQuadre.setAttribute('height', dades[i].height);
         boxQuadre.setAttribute('rotation', dades[i].orientacioMarco);
-        ferPopUps(boxQuadre);
+        ferPopUps(boxQuadre, dades, i);
         document.getElementById("sala").append(boxQuadre);
 
         //marco
@@ -72,8 +68,6 @@ function crearGaleria() {
         //frasePared.setAttribute('material', "side: double");
         frasePared.setAttribute('text', "value: holaaa, aqui hi haura una frase de sa mes xula del món; color: black; width: 4; wrapCount: 25; shader: msdf; font: https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/italianno/Italianno-Regular.json");
         document.getElementById("sala").append(frasePared);
-
-
       });
     }
   };
@@ -81,6 +75,7 @@ function crearGaleria() {
   xmlhttp.send();
 }
 
+/* FUNCIÓ PER CREAR EL QUADRE DELS MARCOS */
 function crearMarcos(dades, i) {
   var marcoEsq = document.createElement("a-box");
   marcoEsq.setAttribute('src', "assets/marco.jpg");
@@ -95,7 +90,6 @@ function crearMarcos(dades, i) {
   marcoEsq.setAttribute('height', dades[i].height + 0.5);
   marcoEsq.setAttribute('rotation', dades[i].orientacioMarco);
   document.getElementById("sala").append(marcoEsq);
-
 
   var marcoDre = document.createElement("a-box");
   marcoDre.setAttribute('src', "assets/marco.jpg");
@@ -129,45 +123,71 @@ function crearMarcos(dades, i) {
   document.getElementById("sala").append(marcoInf);
 }
 
-/* VENTANA POP UP ALS QUADRES */
+
 /* FUNCIÓ OBRIR POP UP QUAN CLICAM QUADRE */
-function ferPopUps(boxQuadre) {
+function ferPopUps(boxQuadre, dades, i) {
   boxQuadre.addEventListener('click', function () {
     document.getElementById("rig").setAttribute('movement-controls', "enabled: false");
     var rotationCamera = document.getElementById("camera").getAttribute('rotation');
 
+    //PLANO QUE FA DE POP UP
     var planePopUp = document.createElement("a-plane");
-    planePopUp.setAttribute('color', "grey");
+    planePopUp.setAttribute('color', "#DEDEDE");
     planePopUp.setAttribute('position', { x: 0, y: 0, z: -3 });
-    planePopUp.setAttribute('width', 4);
-    planePopUp.setAttribute('height', 2);
+    planePopUp.setAttribute('width', 6);
+    planePopUp.setAttribute('height', 3.5);
     planePopUp.setAttribute('material', "side: double");
+
+
+    //CREAM CIRCLE QUE SERVIRÀ PER TANCAR POP UP
+    var circleTancarPopUp = document.createElement("a-circle");
+    circleTancarPopUp.setAttribute('src', "assets/creuPopUp.png");
+    circleTancarPopUp.setAttribute('class', "clickable")
+    circleTancarPopUp.setAttribute('position', { x: 2.65, y: 1.45, z: -2.9 });
+    circleTancarPopUp.setAttribute('radius', 0.2);
+    tancarPopUps(circleTancarPopUp, planePopUp);
+    //planePopUp.appendChild(circleTancarPopUp);
+    document.getElementById("PopPupSala").append(circleTancarPopUp);
+
+
+    //PLANO PER POSAR QUADRE DONA
+    var imatgePopUp = document.createElement("a-plane");
+    imatgePopUp.setAttribute('src', dades[i].imatge);
+    imatgePopUp.setAttribute('position', { x: -1.5, y: 0, z: -2.9 });
+    imatgePopUp.setAttribute('width', 2.3);
+    imatgePopUp.setAttribute('height', 2.7);
+    imatgePopUp.setAttribute('material', "side: double");
+    document.getElementById("PopPupSala").append(imatgePopUp);
+
+
+    //Nom dona + biografia
+    var nomPopUp = document.createElement("a-entity");
+    nomPopUp.setAttribute('scale', "1 1 2");
+    nomPopUp.setAttribute('position', { x: 1.5, y: 1, z: -2.9  })
+    nomPopUp.setAttribute('text', "value:"+ dades[i].nom +"; color: black; width: 2; wrapCount: 15; shader: msdf; font: https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/notoserif/NotoSerif-Regular.json");
+    document.getElementById("PopPupSala").append(nomPopUp);
+
+    var biografiaPopUp = document.createElement("a-entity");
+    biografiaPopUp.setAttribute('scale', "1 1 2");
+    biografiaPopUp.setAttribute('position', { x: 1.2, y: 0, z: -2.9  })
+    biografiaPopUp.setAttribute('text', "value:"+ dades[i].biografies.biografiaCat +"; color: black; width: 2.4; wrapCount: 35; shader: msdf; font: https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/notoserif/NotoSerif-Regular.json");
+    document.getElementById("PopPupSala").append(biografiaPopUp);
+
+
     document.getElementById("PopPupSala").setAttribute('rotation', rotationCamera);
     document.getElementById("PopPupSala").append(planePopUp);
 
-    /*var XposBox = Math.sin(rotationCamera.y) + pos.x;
-    var ZposBox = Math.cos(rotationCamera.y) + pos.z;*/
 
-    //CREAM BOX QUE SERVIRÀ PER TANCAR POP UP
-    var planeTancarPopUp = document.createElement("a-plane");
-    planeTancarPopUp.setAttribute('color', "red");
-    planeTancarPopUp.setAttribute('class', "clickable")
-    planeTancarPopUp.setAttribute('position', { x: 1.75, y: 1.25, z: -3 });
-    planeTancarPopUp.setAttribute('width', 0.5);
-    planeTancarPopUp.setAttribute('height', 0.5);
-    planeTancarPopUp.setAttribute('material', "side: double");
-    tancarPopUps(planeTancarPopUp, planePopUp);
-    document.getElementById("PopPupSala").append(planeTancarPopUp);
-    
+
   });
 }
 
 /* FUNCIÓ TANCAR POP UP QUAN CLICAM CREU */
-function tancarPopUps(planeTancarPopUp, planePopUp) {
-  planeTancarPopUp.addEventListener('click', function (e) {
+function tancarPopUps(circleTancarPopUp, planePopUp) {
+  circleTancarPopUp.addEventListener('click', function (e) {
     document.getElementById("rig").setAttribute('movement-controls', "enabled: true");
-    planeTancarPopUp.parentNode.removeChild(planeTancarPopUp);
-    planePopUp.parentNode.removeChild(planePopUp);
+    circleTancarPopUp.remove();
+    planePopUp.remove();
   });
 }
 
@@ -203,6 +223,8 @@ AFRAME.registerComponent('hover-video', {
 
 */
 
+/*var XposBox = Math.sin(rotationCamera.y) + pos.x;
+var ZposBox = Math.cos(rotationCamera.y) + pos.z;*/
 
 
 
