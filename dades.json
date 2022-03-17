@@ -1,7 +1,7 @@
 [
     {
         "nom": "AdaLovelace",
-        "imatge": "assets/AdaLovelace.jpg",
+        "imatge": "assets/retratos/AdaLovelace.jpg",
         "biografies": {
             "biografiaCat": "Aquí tenim la biografia en catala Aquí tenim la biografia en català Aquí tenim la biografia en català Aquí tenim la biografia en català",
             "biografiaCast": "Aquí tenim la biografia en castellà",
@@ -20,7 +20,7 @@
     },
     {
         "nom": "HedyLamarr",
-        "imatge": "assets/HedyLamarr.jpg",
+        "imatge": "assets/retratos/HedyLamarr.jpg",
         "biografies": {
             "biografiaCat": "Aquí tenim la biografia en catala Aquí tenim la biografia en català",
             "biografiaCast": "Aquí tenim la biografia en castellà",
@@ -38,8 +38,8 @@
         "alert": "holita"
     },
     {
-        "nom": "HedyLamarr2",
-        "imatge": "assets/HedyLamarr.jpg",
+        "nom": "Angela Ruiz",
+        "imatge": "assets/retratos/angelaRuiz.jpeg",
         "biografies": {
             "biografiaCat": "Aquí tenim la biografia en català",
             "biografiaCast": "Aquí tenim la biografia en castellà",
@@ -57,8 +57,8 @@
         "alert": "holita"
     },
     {
-        "nom": "HedyLamarr3",
-        "imatge": "assets/HedyLamarr.jpg",
+        "nom": "Grace M Hopper",
+        "imatge": "assets/retratos/graceMHopper.jpg",
         "biografies": {
             "biografiaCat": "Aquí tenim la biografia en català",
             "biografiaCast": "Aquí tenim la biografia en castellà",

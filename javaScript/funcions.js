@@ -1,10 +1,16 @@
-/*
-  Viewport argument key "minimal-ui" not recognized and ignored.  
-}*/
+/* */
 
+document.addEventListener("DOMContentLoaded", function(event) {
+  //código a ejecutar cuando el DOM está listo para recibir acciones
+  var escenaPrincipal = document.getElementById("sala");
+  if(escenaPrincipal.hasLoaded){
+    init();
+  } else{
+    escenaPrincipal.addEventListener('loaded', init());
+  }
+});
 
 var menuPrincipal = document.createElement("a-entity");
-
 function menuInicial() {
   //menuPrincipal.setAttribute('id', "boxTextoMenu");
   menuPrincipal.setAttribute('class', "clickable");
@@ -28,7 +34,7 @@ menuPrincipal.addEventListener('click', function () {
   menuPrincipal.remove();
 });
 
-function crearGaleria() {
+function init() {
   menuInicial();
   var xmlhttp = new XMLHttpRequest();
   var url = "dades.json";
@@ -55,18 +61,16 @@ function crearGaleria() {
         /*FRASES PAREDS*/
         var frasePared = document.createElement("a-entity");
         if (dades[i].pared == 0) {
-          frasePared.setAttribute('scale', "3 3 4");
+          frasePared.setAttribute('rotation', dades[i].orientacioMarco);
           frasePared.setAttribute('position', { x: dades[i].position_x, y: dades[i].position_y, z: dades[i].position_z - 10 })
         } else if (dades[i].pared == 2) {
-          frasePared.setAttribute('scale', "-3 3 4");
+          frasePared.setAttribute('rotation', "0 -90 0");
           frasePared.setAttribute('position', { x: dades[i].position_x - 1, y: dades[i].position_y, z: dades[i].position_z + 10 })
         } else {
-          frasePared.setAttribute('scale', "3 3 4");
+          frasePared.setAttribute('rotation', dades[i].orientacioMarco);
           frasePared.setAttribute('position', { x: dades[i].position_x + 10, y: dades[i].position_y, z: dades[i].position_z })
         }
-        frasePared.setAttribute('rotation', dades[i].orientacioMarco);
-        //frasePared.setAttribute('material', "side: double");
-        frasePared.setAttribute('text', "value: holaaa, aqui hi haura una frase de sa mes xula del món; color: black; width: 4; wrapCount: 25; shader: msdf; font: https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/italianno/Italianno-Regular.json");
+        frasePared.setAttribute('text', "value: holaaa, aqui hi haura una frase de sa mes xula del món; color: black; width: 12; wrapCount: 25; shader: msdf; font: https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/italianno/Italianno-Regular.json");
         document.getElementById("sala").append(frasePared);
       });
     }
@@ -143,42 +147,38 @@ function ferPopUps(boxQuadre, dades, i) {
     var circleTancarPopUp = document.createElement("a-circle");
     circleTancarPopUp.setAttribute('src', "assets/creuPopUp.png");
     circleTancarPopUp.setAttribute('class', "clickable")
-    circleTancarPopUp.setAttribute('position', { x: 2.65, y: 1.45, z: -2.9 });
-    circleTancarPopUp.setAttribute('radius', 0.2);
+    circleTancarPopUp.setAttribute('position', {x: 2.5, y: 1.3, z: 0.1});
+    circleTancarPopUp.setAttribute('radius', 0.25);
     tancarPopUps(circleTancarPopUp, planePopUp);
-    //planePopUp.appendChild(circleTancarPopUp);
-    document.getElementById("PopPupSala").append(circleTancarPopUp);
+    planePopUp.appendChild(circleTancarPopUp);
 
 
     //PLANO PER POSAR QUADRE DONA
     var imatgePopUp = document.createElement("a-plane");
     imatgePopUp.setAttribute('src', dades[i].imatge);
-    imatgePopUp.setAttribute('position', { x: -1.5, y: 0, z: -2.9 });
+    imatgePopUp.setAttribute('position', {x: -1.5, y: 0, z: 0.1});
     imatgePopUp.setAttribute('width', 2.3);
     imatgePopUp.setAttribute('height', 2.7);
     imatgePopUp.setAttribute('material', "side: double");
-    document.getElementById("PopPupSala").append(imatgePopUp);
+    planePopUp.appendChild(imatgePopUp);
 
 
     //Nom dona + biografia
     var nomPopUp = document.createElement("a-entity");
     nomPopUp.setAttribute('scale', "1 1 2");
-    nomPopUp.setAttribute('position', { x: 1.5, y: 1, z: -2.9  })
+    nomPopUp.setAttribute('position', { x: 1.5, y: 1, z: 0.25  })
     nomPopUp.setAttribute('text', "value:"+ dades[i].nom +"; color: black; width: 2; wrapCount: 15; shader: msdf; font: https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/notoserif/NotoSerif-Regular.json");
-    document.getElementById("PopPupSala").append(nomPopUp);
+    planePopUp.appendChild(nomPopUp);
 
     var biografiaPopUp = document.createElement("a-entity");
     biografiaPopUp.setAttribute('scale', "1 1 2");
-    biografiaPopUp.setAttribute('position', { x: 1.2, y: 0, z: -2.9  })
+    biografiaPopUp.setAttribute('position', { x: 1.2, y: 0, z: 0.25  })
     biografiaPopUp.setAttribute('text', "value:"+ dades[i].biografies.biografiaCat +"; color: black; width: 2.4; wrapCount: 35; shader: msdf; font: https://raw.githubusercontent.com/etiennepinchon/aframe-fonts/master/fonts/notoserif/NotoSerif-Regular.json");
-    document.getElementById("PopPupSala").append(biografiaPopUp);
+    planePopUp.appendChild(biografiaPopUp);
 
 
     document.getElementById("PopPupSala").setAttribute('rotation', rotationCamera);
-    document.getElementById("PopPupSala").append(planePopUp);
-
-
-
+    document.getElementById("PopPupSala").appendChild(planePopUp);
   });
 }
 
@@ -186,8 +186,7 @@ function ferPopUps(boxQuadre, dades, i) {
 function tancarPopUps(circleTancarPopUp, planePopUp) {
   circleTancarPopUp.addEventListener('click', function (e) {
     document.getElementById("rig").setAttribute('movement-controls', "enabled: true");
-    circleTancarPopUp.remove();
-    planePopUp.remove();
+    document.getElementById("PopPupSala").removeChild(planePopUp);
   });
 }
 
