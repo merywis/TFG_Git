@@ -4,17 +4,20 @@
 <head>
   <title>TFG</title>
   <meta name="description" content="TFG">
+    <!-- x problema de reproduir videos a iphone-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
   <!-- llibreria per poder fer move controls (amb lo de la camera) -->
   <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
 
-  
+
 
   <!-- <script src="https://unpkg.com/aframe-event-set-component@^5.0.0/dist/aframe-event-set-component.min.js"></script> 
   <script src="https://unpkg.com/aframe-animation-component@5.0.0/dist/aframe-animation-component.min.js"></script> -->
 
   <!-- 3 includes x audio-->
-  <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+  <script
+    src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
   <script src="https://unpkg.com/aframe-event-set-component@4.0.1/dist/aframe-event-set-component.min.js"></script>
 
 
@@ -27,14 +30,22 @@
   <a-scene id="sala" renderer="colorManagement: true;">
 
     <a-assets>
-      <a-asset-item id="cityModel" src="assets/scene.gltf"></a-asset-item>
+      <a-asset-item id="butacaVerda" src="assets/elements3D/scene.gltf"></a-asset-item>
+      <a-asset-item id="babbageMachine" src="assets/elements3D/babbages/scene.gltf"></a-asset-item>
       <!--  <audio id="audioTomeu" src="assets/audios/audioTomeu.mp3" autoplay preload></audio>
        <audio id="audioTomeu" src="assets/audios/audioTomeu.mp3"></audio>-->
-     <!-- sound -->
-    <audio id="button1" src="//cdn.rawgit.com/michaelnebeling/src/master/button-1.mp3" crossorigin="anonymous"></audio>
-    <audio id="button3" src="//cdn.rawgit.com/michaelnebeling/src/master/button-3.mp3" crossorigin="anonymous"></audio>
-  
-  </a-assets>
+      <!-- sound -->
+      <audio id="button1" src="//cdn.rawgit.com/michaelnebeling/src/master/button-1.mp3"
+        crossorigin="anonymous"></audio>
+      <audio id="button3" src="//cdn.rawgit.com/michaelnebeling/src/master/button-3.mp3"
+        crossorigin="anonymous"></audio>
+
+        <img id= "play" src="assets/play.png">
+        <img id= "pause" src="assets/pause.jpg">
+      <!-- puc afegir un poster="img.jpg" o afegit tb webkit-playsinline controls-->
+        <video id="provaVideo" type="video/mp4" src="assets/prova.mp4" autoplay muted loop="true" playsinline></video>
+	  
+    </a-assets>
 
 
     <!-- box que fa d'habitació babbage -->
@@ -43,7 +54,11 @@
     <!-- plane que funciona com a suelo babbage>-->
     <a-plane src="assets/suelo.jpg" position="-25 -4.9 -15" rotation="90 0 0" width="30" height="40"
       material="side: double"></a-plane>
-    <a-gltf-model src="#cityModel" scale="4 4 4" position="-9 -4 -30"></a-gltf-model>
+
+    <a-gltf-model src="#babbageMachine" scale="0.03 0.03 0.03" position="-23 -1 -10" rotation="0 90 0"></a-gltf-model>
+    <a-entity light="type: point; intensity: 2.00; distance: 50; decay: 8" position="-23 3 -10"></a-entity>
+
+
 
 
     <!-- box que fa d'habitació principal -->
@@ -54,6 +69,7 @@
     <a-plane src="assets/suelo.jpg" position="15 -4.9 -15" rotation="90 0 0" width="60" height="40"
       material="side: double"></a-plane>
 
+    <a-gltf-model src="#butacaVerda" scale="4 4 4" position="-9 -4 -30"></a-gltf-model>
     <!-- plano que fa de pared que divideix les dues habitacions-->
     <a-plane src="assets/pared.jpg" position="15 3 -10" rotation="0 90 0" width="30" height="16"
       material="side: double"></a-plane>
@@ -66,9 +82,31 @@
           position="-1 1 -5" 
           radius="0.5"
           sound="src: #audioTomeu; on: click; volume: 1; refDistance: 20; rolloffFactor: 0.1"></a-sphere>-->
-    
-          <!-- click to begin -->
-<a-sphere id = "esfera1" position="0 1.25 -5" radius="1.25" color="#EF2D5E" class = "clickable" sound="src: #button1; on: click; poolSize: 3" sound__mouseenter="src: #button3; on: mouseenter; poolSize: 2"></a-sphere>
+
+    <!-- ANIMACIONS -->
+    <a-sphere id="esfera1" position="0 1.25 -5" radius="1.25" color="#EF2D5E" class="clickable"
+      sound="src: #button1; on: click; poolSize: 3" sound__mouseenter="src: #button3; on: mouseenter; poolSize: 2"
+      animation__mouseenter="property: material.color; startEvents: mouseenter; easing: easeInCubic; dur: 1050; dir: alternate; from:#F7B9B9; to:#F24B4B; loop: false">
+    </a-sphere>
+
+    <a-entity position="-2 1.25 -5" id="fading-cube" geometry="primitive: box" material="opacity: 1"
+      animation="property: material.opacity; begin:fade; to;0">
+    </a-entity>
+
+
+    <!-- VIDEO-->
+   <!-- <a-video src="#provaVideo" width="6" height="4" position="3 1 -8" play="true"></a-video>-->
+     
+     <a-video src="#provaVideo" width="6" height="4" position="3 1 -8">
+      <a-image id="videoControls" src="#play" position="3 -4 -8" scale="2 2 2"  class="clickable" play="true" play-pause></a-image>
+    </a-video>
+
+    <!--
+    <a-sphere position="-2 1.25 -5" radius="0.5" material="color:organge; emissive: yellow; emissive-intensity: 0.5;"
+      animation__pulse="property: material.emissiveIntensity; from: 0.5; to: 0.0; dur: 1000; loop: true; dir: alternate; easing: linear;">
+    </a-sphere>-->
+
+
     <!--<a-box position="-1 0.5 -3" rotation="0 45 0" width="1" height="1" depth="1" color="#4CC3D9" sound="src: #button1; on: click; poolSize: 3" sound__mouseenter="src: #button3; on: mouseenter; poolSize: 2"></a-box>
   
     <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D" sound="src: #button1; on: click; poolSize: 3" sound__mouseenter="src: #button3; on: mouseenter; poolSize: 2"></a-cylinder>
@@ -108,7 +146,7 @@ italianno Italianno-Regular.json -->
       <a-entity id="PopPupSala"></a-entity>
     </a-entity>
 
-    
+
 
 
   </a-scene>

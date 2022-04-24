@@ -1,4 +1,5 @@
-/* */
+
+
 
 document.addEventListener("DOMContentLoaded", function(event) {
   //código a ejecutar cuando el DOM está listo para recibir acciones
@@ -22,13 +23,11 @@ function menuInicial() {
   document.getElementById("camera").appendChild(menuPrincipal);
 }
 
+
 /*  funció per eliminar el menú si hi clicam damunt */
 menuPrincipal.addEventListener('click', function () {
-  console.log("soc aqui")
  // document.getElementById("camera").setAttribute("look-controls","pointerLockEnabled", true);
-  console.log("soc aqui2")
   menuPrincipal.remove();
-  console.log("soc aqui")
 });
 
 function init() {
@@ -49,6 +48,9 @@ function init() {
         boxQuadre.setAttribute('width', dades[i].width);
         boxQuadre.setAttribute('height', dades[i].height);
         boxQuadre.setAttribute('rotation', dades[i].orientacioMarco);
+
+        boxQuadre.setAttribute('animation__mouseenter', "property: material.color; startEvents: mouseenter; easing: easeInCubic; dur: 1050; dir: alternate; from:#F7B9B9; to:#F24B4B; loop: false");
+  
         ferPopUps(boxQuadre, dades, i);
         document.getElementById("sala").appendChild(boxQuadre);
 
@@ -77,6 +79,7 @@ function init() {
 }
 
 /* FUNCIÓ PER CREAR EL QUADRE DELS MARCOS */
+//fer una box grossa al fons del quadre com a marco??
 function crearMarcos(dades, i) {
   var marcoEsq = document.createElement("a-box");
   marcoEsq.setAttribute('src', "assets/marco.jpg");
@@ -91,6 +94,9 @@ function crearMarcos(dades, i) {
   marcoEsq.setAttribute('height', dades[i].height + 0.5);
   marcoEsq.setAttribute('rotation', dades[i].orientacioMarco);
   document.getElementById("sala").appendChild(marcoEsq);
+
+
+  
 
   var marcoDre = document.createElement("a-box");
   marcoDre.setAttribute('src', "assets/marco.jpg");
@@ -199,6 +205,25 @@ function tancarPopUps(circleTancarPopUp, planePopUp) {
 }
 
 
+AFRAME.registerComponent('play-pause',{
+  init: function(){
+    console.log("he entrat al play-pause");
+  var video = document.querySelector("#provaVideo");
+  var videoControls = document.querySelector("#videoControls");
+  this.el.addEventListener('click',function(){
+    console.log("he entrat aleventlistener");
+      if(video.paused){
+        console.log("gola entre pause");
+        video.play();
+        videoControls.setAttribute('src',"#pause");
+      }else{
+        console.log("gola entre play");
+        video.pause();
+        videoControls.setAttribute('src',"#play");
+      }
+   });
+  }
+});
 /*
 var botoAudioguia = document.createElement("a-entity");
 //menuPrincipal.setAttribute('id', "boxTextoMenu");
@@ -209,78 +234,6 @@ botoAudioguia.setAttribute('geometry', "primitive: plane; width: 2; height: 0.5"
 botoAudioguia.setAttribute('material', "color: #D0B7EE; shader: flat; opacity: 0.7; visible: true");
 document.getElementById("sala").append(botoAudioguia);
 */
-
-/*var sound = new Howl({
-  src: ['assets/audios/audioTomeu.mp3', 'assets/audios/audioTomeu.ogg'],
-  autoplay: false,   // true = se autoejecuta
-  loop: true,       // true = bucle de audio
-  volume: 0.5,      // Nivel del volumen [0-1]
-  onend: function() {   // Se ejecuta al finalizar la pista
-    alert('Fin');
-  }
-});
-
-//sound.play();
-
-/*  funció per eliminar el menú si hi clicam damunt */
-/*botoAudioguia.addEventListener('click', function () {
-  console.log("he entrat???");
-  console.log(sound);
-  sound.load();
-  sound.play();
-  console.log(sound);
-});
-
-var soundHandle = document.getElementById('audioTomeuProva');
-
-$(document).ready(function() {
-    addEventListener('touchstart', function (e) {
-      console.log("he entrar ap rova ")
-        soundHandle.src = 'assets/audios/audioTomeu.mp3';
-        soundHandle.loop = true;
-        soundHandle.play();
-        soundHandle.pause();
-    });
-});
-
-soundHandle.play();
-*/
-/*
-AFRAME.registerComponent('audio', {
-  schema: {
-    src: { type: 'audio' },
-    loop: { type: 'boolean' },
-    volume: { type: 'int', default: 1 },
-    distance: { type: 'int', default: 8 },
-    fade: { type: 'int', default: 5000 },
-  },
-
-  init: function() {
-    this.sound = new Howl({
-      src: [ this.data.src ],
-      loop: this.data.loop,
-      volume: this.data.volume
-    });
-
-    this.camera = document.getElementById('rig');
-  },
-
-  tick: function() {
-    const objPos = this.el.object3D.position;
-    const camPos = this.camera.object3D.position;
-    const distance = objPos.distanceTo(camPos);
-
-    if (!this.audioId && distance < this.data.distance) {
-      this.audioId = this.sound.play();
-      this.sound.fade(0, 1, this.data.fade, this.audioId);
-    }
-    else if (this.audioId && distance >= this.data.distance) {
-      this.sound.fade(1, 0, this.data.fade, this.audioId);
-      this.audioId = null;
-    }
-  }
-});*/
-
 
 
 
