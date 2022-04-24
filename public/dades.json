@@ -1,0 +1,98 @@
+[
+    {
+        "nom": "AdaLovelace",
+        "imatge": "assets/retratos/AdaLovelace.jpg",
+        "biografies": {
+            "biografiaCat": "Ada Lovelace estudió ciencia desde muy pequeña. Una de sus tutoras le presentó al matemático Charles Babbage (considerado hoy en día como el padre de los ordenadores), con quien estableció una gran amistad y elaboraron su trabajo más conocido: una máquina analítica que fuese capaz de realizar de forma automática cualquier tipo de cálculo. \n \n Entre sus notas sobre la máquina, se encuentra lo que hoy se reconoce como el primer algoritmo de la historia, por lo que se merece ser considerada como la primera programadora de ordenadores (es importante destacar que en esta época aún no existían los ordenadores). Ese primer programa informático describe con absoluta precisión los cálculos que debía llevar a cabo la máquina analítica para obtener los números de Bernoulli. Existe un lenguaje llamado Ada en su honor.",
+            "biografiaCast": "Aquí tenim la biografia en castellà",
+            "biografiaAng": "Aquí tenim la biografia en anglès"
+        },
+        "frase":  "Si es una buena idea, continuad y llevadla a término. Es mucho más fácil pedir disculpas que conseguir el permiso necesario”, Grace Murray Hopper.",
+        "position_x": -14.8,
+        "position_y": 2,
+        "position_z": -5,
+        "depth": 0.5,
+        "width": 5,
+        "height": 7,
+        "orientacioMarco": "0 90 0",
+        "pared": 0,
+        "audios":{
+            "audioCat": "assets/audios/audioTomeu.mp3",
+            "audioCast": "assets/audios/audioTomeu.mp3",
+            "audioAng": "assets/audios/audioTomeu.mp3"
+        },
+        "alert": "holita"
+    },
+    {
+        "nom": "HedyLamarr",
+        "imatge": "assets/retratos/HedyLamarr.jpg",
+        "biografies": {
+            "biografiaCat": "Aquí tenim la biografia en catala Aquí tenim la biografia en català",
+            "biografiaCast": "Aquí tenim la biografia en castellà",
+            "biografiaAng": "Aquí tenim la biografia en anglès"
+        },
+        "frase": "Si es una buena idea, continuad y llevadla a término. Es mucho más fácil pedir disculpas que conseguir el permiso necesario”, Grace Murray Hopper.",
+        "position_x": -14.8,
+        "position_y": 2,
+        "position_z": -25,
+        "depth": 0.5,
+        "width": 5,
+        "height": 7,
+        "orientacioMarco": "0 90 0",
+        "pared": 0,
+        "audios":{
+            "audioCat": "assets/audios/clickSound.mp3",
+            "audioCast": "assets/audios/audioTomeu.mp3",
+            "audioAng": "assets/audios/audioTomeu.mp3"
+        },
+        "alert": "holita"
+    },
+    {
+        "nom": "Angela Ruiz",
+        "imatge": "assets/retratos/angelaRuiz.jpeg",
+        "biografies": {
+            "biografiaCat": "Ada Lovelace estudió ciencia desde muy pequeña. Una de sus tutoras le presentó al matemático Charles Babbage (considerado hoy en día como el padre de los ordenadores), con quien estableció una gran amistad y elaboraron su trabajo más conocido: una máquina analítica que fuese capaz de realizar de forma automática cualquier tipo de cálculo. \n \n Entre sus notas sobre la máquina, se encuentra lo que hoy se reconoce como el primer algoritmo de la historia, por lo que se merece ser considerada como la primera programadora de ordenadores (es importante destacar que en esta época aún no existían los ordenadores). Ese primer programa informático describe con absoluta precisión los cálculos que debía llevar a cabo la máquina analítica para obtener los números de Bernoulli. Existe un lenguaje llamado Ada en su honor.",
+            "biografiaCast": "Aquí tenim la biografia en castellà",
+            "biografiaAng": "Aquí tenim la biografia en anglès"
+        },
+        "frase":  "Si es una buena idea, continuad y llevadla a término. Es mucho más fácil pedir disculpas que conseguir el permiso necesario”, Grace Murray Hopper.",
+        "position_x": 7,
+        "position_y": 2,
+        "position_z": -34.8,
+        "depth": 0.1,
+        "width": 5,
+        "height": 7,
+        "orientacioMarco": "0 0 0",
+        "pared": 1,
+        "audios":{
+            "audioCat": "assets/audios/audioTomeu.mp3",
+            "audioCast": "assets/audios/audioTomeu.mp3",
+            "audioAng": "assets/audios/audioTomeu.mp3"
+        },
+        "alert": "holita"
+    },
+    {
+        "nom": "Grace M Hopper",
+        "imatge": "assets/retratos/graceMHopper.jpg",
+        "biografies": {
+            "biografiaCat": "Aquí tenim la biografia en català",
+            "biografiaCast": "Aquí tenim la biografia en castellà",
+            "biografiaAng": "Aquí tenim la biografia en anglès"
+        },
+        "frase": "Si es una buena idea, continuad y llevadla a término. Es mucho más fácil pedir disculpas que conseguir el permiso necesario”, Grace Murray Hopper.",
+        "position_x": 14.7,
+        "position_y": 2,
+        "position_z": -15,
+        "depth": 0.1,
+        "width": 5,
+        "height": 7,
+        "orientacioMarco": "0 90 0",
+        "pared": 2,
+        "audios":{
+            "audioCat": "assets/audios/audioTomeu.mp3",
+            "audioCast": "assets/audios/audioTomeu.mp3",
+            "audioAng": "assets/audios/audioTomeu.mp3"
+        },
+        "alert": "holita"
+    }
+]
